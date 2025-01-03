@@ -9,6 +9,7 @@ export const Navbar = () => {
     <header className="w-full fixed top-0 left-0 z-40 transition-all duration-300 bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg border-b border-emerald-800">
       <div className="container mx-auto px-4 py-3">
         <div className="flex flex-wrap justify-between items-center">
+          {/* logo */}
           <Link
             to="/"
             className="space-x-2 flex items-center text-2xl text-emerald-400 font-bold"
@@ -16,7 +17,9 @@ export const Navbar = () => {
             E-Commerce
           </Link>
 
+          {/* nav */}
           <nav className="flex flex-wrap items-center gap-4">
+            {/* home */}
             <Link
               to="/"
               className="text-gray-300 hover:text-emerald-400 transition duration-300 ease-in-out"
@@ -24,6 +27,7 @@ export const Navbar = () => {
               Home
             </Link>
 
+            {/* cart */}
             {user && (
               <Link
                 to="/cart"
@@ -40,6 +44,7 @@ export const Navbar = () => {
               </Link>
             )}
 
+            {/* dashboard */}
             {isAdmin && (
               <Link
                 to="/admin"
@@ -50,6 +55,7 @@ export const Navbar = () => {
               </Link>
             )}
 
+            {/* logout or register & login */}
             {user ? (
               <button className="px-4 py-2 flex items-center text-white transition duration-300 ease-in-out rounded-md bg-gray-700 hover:bg-gray-600">
                 <LogOut size={18} />
