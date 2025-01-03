@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 import { Navbar } from "./components/Navbar";
 
@@ -20,9 +20,9 @@ const App = () => {
         <Navbar />
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>
