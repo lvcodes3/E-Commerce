@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LogIn, Mail, Lock, ArrowRight, Loader } from "lucide-react";
 
+const inputDivStyle = "mt-1 relative shadow-sm rounded-md";
+const iconDivStyle =
+  "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none";
+const labelStyle = "block text-sm text-gray-300 font-medium";
+const inputStyle =
+  "w-full px-3 pl-10 py-2 block sm:text-sm placeholder-gray-400 bg-gray-700 shadow-sm border border-gray-600 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500";
+
 const Login = () => {
   const loading = false;
 
@@ -37,15 +44,13 @@ const Login = () => {
       >
         <div className="px-4 sm:px-10 py-8 shadow sm:rounded-lg bg-gray-800">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* email */}
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm text-gray-300 font-medium"
-              >
+              <label htmlFor="email" className={`${labelStyle}`}>
                 Email
               </label>
-              <div className="mt-1 relative shadow-sm rounded-md">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <div className={`${inputDivStyle}`}>
+                <div className={`${iconDivStyle}`}>
                   <Mail aria-hidden="true" className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
@@ -61,20 +66,18 @@ const Login = () => {
                     })
                   }
                   required
-                  className="w-full px-3 pl-10 py-2 block sm:text-sm placeholder-gray-400 bg-gray-700 shadow-sm border border-gray-600 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className={`${inputStyle}`}
                 />
               </div>
             </div>
 
+            {/* password */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm text-gray-300 font-medium"
-              >
+              <label htmlFor="password" className={`${labelStyle}`}>
                 Password
               </label>
-              <div className="mt-1 relative shadow-sm rounded-md">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <div className={`${inputDivStyle}`}>
+                <div className={`${iconDivStyle}`}>
                   <Lock aria-hidden="true" className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
@@ -90,11 +93,12 @@ const Login = () => {
                     })
                   }
                   required
-                  className="w-full px-3 pl-10 py-2 block sm:text-sm placeholder-gray-400 bg-gray-700 shadow-sm border border-gray-600 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className={`${inputStyle}`}
                 />
               </div>
             </div>
 
+            {/* submit button */}
             <button
               type="submit"
               disabled={loading}
