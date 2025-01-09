@@ -1,12 +1,28 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import useUserStore from "./stores/useUserStore.js";
 
-import { Navbar } from "./components/Navbar";
+import Landing from "./pages/Landing.jsx";
+import Home from "./pages/Home.jsx";
+import Register from "./pages/Register.jsx";
+import Login from "./pages/Login.jsx";
+
+import { Navbar } from "./components/Navbar.jsx";
+import { LoadingSpinner } from "./components/LoadingSpinner.jsx";
 
 const App = () => {
+  const { user, checkingAuth, checkAuth } = useUserStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (checkingAuth) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="min-h-screen relative text-white overflow-hidden bg-gray-900">
       {/* Background Gradient */}
@@ -16,15 +32,32 @@ const App = () => {
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="pt-20 relative z-50">
         <Navbar />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/landing"
+            element={!user ? <Landing /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/"
+            element={user ? <Home /> : <Navigate to="/landing" />}
+          />
+          <Route
+            path="/register"
+            element={!user ? <Register /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
         </Routes>
       </div>
+
+      {/* Toast Content */}
+      <Toaster />
     </div>
   );
 };

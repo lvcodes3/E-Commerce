@@ -1,18 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { motion } from "framer-motion";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 
-const inputDivStyle = "mt-1 relative shadow-sm rounded-md";
-const iconDivStyle =
-  "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none";
-const labelStyle = "block text-sm text-gray-300 font-medium";
-const inputStyle =
-  "w-full px-3 pl-10 py-2 block sm:text-sm placeholder-gray-400 bg-gray-700 shadow-sm border border-gray-600 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500";
+import useUserStore from "../stores/useUserStore.js";
 
 const Register = () => {
-  const loading = false;
-
   const [registerFormData, setRegisterFormData] = useState({
     name: "",
     email: "",
@@ -20,10 +14,72 @@ const Register = () => {
     passwordConfirmation: "",
   });
 
+  const { loading, register } = useUserStore();
+
+  const validateData = () => {
+    // trim values //
+    setRegisterFormData({
+      name: registerFormData.name.trim(),
+      email: registerFormData.email.trim(),
+      password: registerFormData.password.trim(),
+      passwordConfirmation: registerFormData.passwordConfirmation.trim(),
+    });
+
+    // required fields //
+    if (
+      !registerFormData.name ||
+      !registerFormData.email ||
+      !registerFormData.password ||
+      !registerFormData.passwordConfirmation
+    ) {
+      toast.error("All fields are required.");
+      return false;
+    }
+
+    // naming convention //
+    const nameBlocks = registerFormData.name.split(" ");
+    for (let i = 0; i < nameBlocks.length; i++) {
+      nameBlocks[i] =
+        nameBlocks[i][0].toUpperCase() + nameBlocks[i].slice(1).toLowerCase();
+    }
+    setRegisterFormData({
+      ...registerFormData,
+      name: nameBlocks.join(" "),
+    });
+
+    // validation //
+    if (!/\S+@\S+\.\S+/.test(registerFormData.email)) {
+      toast.error("Email must be a valid email.");
+      return false;
+    }
+
+    if (registerFormData.password.length < 6) {
+      toast.error("Password must be at least 6 characters.");
+      return false;
+    }
+
+    if (registerFormData.password !== registerFormData.passwordConfirmation) {
+      toast.error("Passwords do not match.");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(registerFormData);
+
+    if (validateData()) {
+      register(registerFormData);
+    }
   };
+
+  const inputDivStyle = "mt-1 relative shadow-sm rounded-md";
+  const iconDivStyle =
+    "absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none";
+  const labelStyle = "block text-sm text-gray-300 font-medium";
+  const inputStyle =
+    "w-full px-3 pl-10 py-2 block sm:text-sm placeholder-gray-400 bg-gray-700 shadow-sm border border-gray-600 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-500";
 
   return (
     <div className="py-12 sm:px-6 lg:px-8 flex flex-col justify-center">
