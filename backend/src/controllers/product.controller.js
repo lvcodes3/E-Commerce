@@ -97,9 +97,9 @@ export const getAllProducts = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     // data validation //
-    const { name, description, price, image, category } = req.body;
+    const { name, description, price, stock, image, category } = req.body;
 
-    if (!name || !description || !price || !image || !category) {
+    if (!name || !description || !price || !stock || !image || !category) {
       return res.status(400).json({ message: "All fields are required." });
     }
 
@@ -111,6 +111,7 @@ export const createProduct = async (req, res) => {
       name,
       description,
       price,
+      stock,
       image: cloudinaryResponse?.secure_url
         ? cloudinaryResponse.secure_url
         : "",

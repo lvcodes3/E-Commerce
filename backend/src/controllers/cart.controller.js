@@ -44,8 +44,14 @@ export const addProductToCart = async (req, res) => {
     }
 
     // make sure product exists //
-    if (!(await Product.findById(productId))) {
+    const product = await Product.findById(productId);
+
+    if (!product) {
       return res.status(400).json({ message: "Product does not exist." });
+    }
+
+    if (product.stock === 0) {
+      return res.status(400).json({ message: "Product is out of stock." });
     }
 
     // check if user has product in cart //
@@ -84,8 +90,16 @@ export const updateProductQuantityInCart = async (req, res) => {
     }
 
     // make sure product exists //
-    if (!(await Product.findById(productId))) {
+    const product = await Product.findById(productId);
+
+    if (!product) {
       return res.status(400).json({ message: "Product does not exist." });
+    }
+
+    if (product.stock < productQuantity) {
+      return res
+        .status(400)
+        .json({ message: `Product only has ${product.stock} in stock.` });
     }
 
     // check if user has product in cart //

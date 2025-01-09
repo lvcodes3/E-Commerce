@@ -15,13 +15,26 @@ const productSchema = new mongoose.Schema(
       min: [0, "Price must be at least 0."],
       required: [true, "Price is required."],
     },
+    stock: {
+      type: Number,
+      min: [0, "Stock must be at least 0."],
+      required: [true, "Stock is required."],
+    },
     image: {
       type: String,
       required: [true, "Image is required."],
     },
     category: {
       type: String,
-      enum: ["electronics", "clothing", "accessories"],
+      enum: [
+        "Jeans",
+        "T-Shirts",
+        "Shoes",
+        "Glasses",
+        "Jackets",
+        "Suits",
+        "Bags",
+      ],
       required: [true, "Category is required."],
     },
     isFeatured: {
