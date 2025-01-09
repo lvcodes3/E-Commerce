@@ -66,13 +66,13 @@ const Login = () => {
       >
         <div className="px-4 sm:px-10 py-8 shadow sm:rounded-lg bg-gray-800">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* email */}
+            {/* Email */}
             <div>
-              <label htmlFor="email" className={`${labelStyle}`}>
+              <label htmlFor="email" className={labelStyle}>
                 Email
               </label>
-              <div className={`${inputDivStyle}`}>
-                <div className={`${iconDivStyle}`}>
+              <div className={inputDivStyle}>
+                <div className={iconDivStyle}>
                   <Mail aria-hidden="true" className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
@@ -93,13 +93,13 @@ const Login = () => {
               </div>
             </div>
 
-            {/* password */}
+            {/* Password */}
             <div>
-              <label htmlFor="password" className={`${labelStyle}`}>
+              <label htmlFor="password" className={labelStyle}>
                 Password
               </label>
-              <div className={`${inputDivStyle}`}>
-                <div className={`${iconDivStyle}`}>
+              <div className={inputDivStyle}>
+                <div className={iconDivStyle}>
                   <Lock aria-hidden="true" className="w-5 h-5 text-gray-400" />
                 </div>
                 <input
@@ -120,7 +120,7 @@ const Login = () => {
               </div>
             </div>
 
-            {/* submit button */}
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
