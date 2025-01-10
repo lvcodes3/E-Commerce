@@ -1,7 +1,7 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
 
-import redis from "../lib/redis.js";
+import redis from "./redis.js";
 
 /**
  * Auth Process Using JWTs - Access (15 mins) & Refresh (7 days).
