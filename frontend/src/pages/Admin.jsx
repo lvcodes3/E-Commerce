@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { BarChart, PlusCircle, ShoppingBasket } from "lucide-react";
+
+import useProductStore from "../stores/useProductStore.js";
 
 import { CreateProductForm } from "../components/CreateProductForm.jsx";
 import { ProductsList } from "../components/ProductsList.jsx";
@@ -27,8 +29,14 @@ const Admin = () => {
 
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
+  const { getAllProducts } = useProductStore();
+
+  useEffect(() => {
+    getAllProducts();
+  }, [getAllProducts]);
+
   return (
-    <div className="min-h-screen relative text-white overflow-hidden bg-gray-900">
+    <div className="min-h-screen relative overflow-hidden">
       <div className="container mx-auto px-4 py-16 relative z-10">
         {/* Header */}
         <motion.h1

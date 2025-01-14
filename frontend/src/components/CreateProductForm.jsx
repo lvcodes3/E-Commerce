@@ -188,9 +188,7 @@ export const CreateProductForm = () => {
             required
             className={inputStyle}
           >
-            <option value="" selected>
-              Select A Category
-            </option>
+            <option value="">Select A Category</option>
             {categories.map((category) => {
               return (
                 <option key={category} value={category}>

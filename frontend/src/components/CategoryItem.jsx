@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const CategoryItem = ({ category }) => {
   return (
     <div className="w-full h-96 relative overflow-hidden rounded-lg group">
-      <Link to={`category${category.href}`}>
+      <Link to={`category/${category.name}`}>
         <div className="w-full h-full cursor-pointer">
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent to-gray-900 opacity-50" />
 

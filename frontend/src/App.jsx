@@ -7,6 +7,7 @@ import useUserStore from "./stores/useUserStore.js";
 import Landing from "./pages/Landing.jsx";
 import Home from "./pages/Home.jsx";
 import Admin from "./pages/Admin.jsx";
+import Category from "./pages/Category.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 
@@ -38,24 +39,24 @@ const App = () => {
         <Navbar />
 
         <Routes>
-          <Route
-            path="/landing"
-            element={!user ? <Landing /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/"
-            element={user ? <Home /> : <Navigate to="/landing" />}
-          />
+          <Route path="/landing" element={<Landing />} />
+
+          <Route path="/" element={<Home />} />
+
           <Route
             path="/admin"
             element={
               user && user.role === "admin" ? <Admin /> : <Navigate to="/" />
             }
           />
+
+          <Route path="/category/:category" element={<Category />} />
+
           <Route
             path="/register"
             element={!user ? <Register /> : <Navigate to="/" />}
           />
+
           <Route
             path="/login"
             element={!user ? <Login /> : <Navigate to="/" />}
