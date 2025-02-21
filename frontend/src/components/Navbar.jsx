@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
 
 import useUserStore from "../stores/useUserStore.js";
+import useCartStore from "../stores/useCartStore.js";
 
 export const Navbar = () => {
   const { user, logout } = useUserStore();
+
+  const { cart } = useCartStore();
 
   const isAdmin = user?.role === "admin";
 
@@ -42,7 +45,7 @@ export const Navbar = () => {
                 />
                 <span className="hidden sm:inline">Cart</span>
                 <span className="px-2 py-0.5 absolute -top-2 -left-2 text-xs text-white rounded-full transition duration-300 ease-in-out bg-emerald-500 group-hover:bg-emerald-400">
-                  3
+                  {cart.length}
                 </span>
               </Link>
             )}

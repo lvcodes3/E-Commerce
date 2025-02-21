@@ -1,13 +1,21 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+
+import categories from "../data/categories.js";
 
 import useProductStore from "../stores/useProductStore.js";
 
 import { ProductCard } from "../components/ProductCard.jsx";
 
 const Category = () => {
+  const navigate = useNavigate();
+
   const { category } = useParams();
+
+  if (!categories.includes(category)) {
+    navigate("/");
+  }
 
   const { products, getProductsByCategory } = useProductStore();
 

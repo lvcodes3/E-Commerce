@@ -3,19 +3,11 @@ import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { Loader, Upload, PlusCircle } from "lucide-react";
 
+import categories from "../data/categories.js";
+
 import useProductStore from "../stores/useProductStore.js";
 
 export const CreateProductForm = () => {
-  const categories = [
-    "Jeans",
-    "T-Shirts",
-    "Shoes",
-    "Glasses",
-    "Jackets",
-    "Suits",
-    "Bags",
-  ];
-
   const [createProductFormData, setCreateProductFormData] = useState({
     name: "",
     description: "",
